@@ -1,24 +1,22 @@
-package com.epolTask.userList.UserService;
+package com.epolTask.userList.userService;
 
-import com.epolTask.userList.UserDao.UserDao;
-import com.epolTask.userList.model.User;
+import com.epolTask.userList.userDao.UserDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
 public class UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserDaoImpl userDaoImpl;
 
     public List getAllUsers() {
-        return userDao.getAllUsers();
+        return userDaoImpl.getAllUsers();
     }
 
     public void delete(String id) {
-        userDao.delete(id);
+        userDaoImpl.delete(id);
     }
 }

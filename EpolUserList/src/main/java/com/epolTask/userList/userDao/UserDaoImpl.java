@@ -1,4 +1,4 @@
-package com.epolTask.userList.UserDao;
+package com.epolTask.userList.userDao;
 
 import com.epolTask.userList.model.User;
 import org.springframework.stereotype.Repository;
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class UserDao implements UserDaoImpl{
+public class UserDaoImpl implements UserDao {
     User user = new User("1", "sanek", "aristarhovich");
     User user1 = new User("2", "atulber", "bayan");
     User user2 = new User("3", "maga", "zamirovich");
