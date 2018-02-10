@@ -1,0 +1,5 @@
+com/epolTask/userList/UserDao/UserDao.class
+com/epolTask/userList/UserService/UserService.class
+com/epolTask/userList/controller/UserController.class
+com/epolTask/userList/UserDao/UserDaoImpl.class
+com/epolTask/userList/model/User.class
