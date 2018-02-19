@@ -1,39 +1,57 @@
 package com.epolTask.userList.controller;
 
-import com.epolTask.userList.userService.UserService;
+
+import com.epolTask.userList.model.User;
+import com.epolTask.userList.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import java.util.List;
 
 @Controller
-@RequestMapping("/users")
+//@RequestMapping("/users")
 public class UserController {
 
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
-//    @RequestMapping(value = "/list", method = RequestMethod.GET)
-//    public @ResponseBody List<User> getAllUsers() {
-//        return userService.getAllUsers();
+    @GetMapping(value = "/list")
+    public @ResponseBody
+    List<User> getAllUsers() {
+        return userService.allUsers();
+    }
+
+    @GetMapping(value = "/")
+    public String hello(Model model) {
+        model.addAttribute("users", userService.allUsers());
+        return "list";
+    }
+
+    @GetMapping(value="/{id}/delete")
+    public String delete(@PathVariable("id") Long id) {
+        userService.deleteUserById(id);
+        return "redirect:/list";
+    }
+
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping(value = "/register")
+    public String registrForm(ModelAndView model, User user) {
+//        model.addObject("register", user);
+        return "registerPage";
+    }
+
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//    public String add(@RequestParam("id") int id,
+//                      @RequestParam("name") String name,
+//                      @RequestParam("surname") String surname) {
+//        userService.addUser(id, name, surname);
+//        return "redirect:/all";
 //    }
-
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ModelAndView listUser() {
-        ModelAndView map = new ModelAndView("users-page");
-        map.addObject("users", userService.getAllUsers());
-        return map;
-    }
-
-    @RequestMapping(value="/{id}/delete", method = RequestMethod.GET)
-    public String delUser(@PathVariable("id") String id) {
-        userService.delete(id);
-        System.out.println(id);
-        return "redirect:/users/all";
-    }
-
 }
