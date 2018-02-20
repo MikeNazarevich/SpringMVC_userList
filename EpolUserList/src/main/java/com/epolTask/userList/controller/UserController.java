@@ -36,16 +36,7 @@ public class UserController {
         return "redirect:/list";
     }
 
-    @GetMapping(value = "/login")
-    public String login() {
-        return "login";
-    }
 
-    @GetMapping(value = "/register")
-    public String registrForm(ModelAndView model, User user) {
-//        model.addObject("register", user);
-        return "registerPage";
-    }
 
 //    @RequestMapping(value = "/add", method = RequestMethod.POST)
 //    public String add(@RequestParam("id") int id,
