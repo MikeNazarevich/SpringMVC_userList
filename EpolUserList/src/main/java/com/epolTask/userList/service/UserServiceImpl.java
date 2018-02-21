@@ -11,20 +11,25 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@Primary
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
 
     @Override
-    public List<User> allUsers() {
+    @Transactional
+    public List<User> getAllUsers() {
         return userDao.findAll();
     }
 
     @Override
     @Transactional
     public void deleteUserById(Long id) {
-        userDao.deleteUserById(id);
+        userDao.delete(id);
+    }
+
+    @Transactional
+    public void createUser(User user) {
+        userDao.save(user);
     }
 
 }

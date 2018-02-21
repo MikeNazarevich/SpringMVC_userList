@@ -953,7 +953,7 @@
     </key>
     <column id="238" parent="231" name="id">
       <Position>1</Position>
-      <DataType>int(10) unsigned|0</DataType>
+      <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>

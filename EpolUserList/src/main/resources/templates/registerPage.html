@@ -10,6 +10,13 @@
         <form th:action="@{/register}" th:object="${user}" method="POST">
             <table>
                 <tr>
+                    <td>id</td>
+                    <td><input type="text" th:field="*{id}" /> </td>
+                    <td>
+                        <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">..</span>
+                    </td>
+                </tr>
+                <tr>
                     <td>First Name</td>
                     <td><input type="text" th:field="*{name}" /> </td>
                     <td>
@@ -24,14 +31,19 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>Nickname</td>
+                    <td><input type="text" th:field="*{nickname}" /> </td>
+                    <td>
+                        <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">..</span>
+                    </td>
+                </tr>
+                <tr>
                     <td>Password</td>
                     <td><input type="password" th:field="*{password}" /> </td>
                     <td>
                         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">..</span>
                     </td>
                 </tr>
-
-
                 <tr>
                     <td>&nbsp;</td>
                     <td>

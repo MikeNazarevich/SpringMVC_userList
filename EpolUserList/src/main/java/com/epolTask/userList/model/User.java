@@ -1,6 +1,10 @@
 package com.epolTask.userList.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -9,25 +13,33 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, length = 30, unique = true)
+    @NotNull
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String name;
 
-    @Column(nullable = false, length = 30)
+    @NotNull
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String surname;
 
-    @Column(nullable = false, length = 30)
+    @NotNull
+    @NotEmpty
+    @Size(min = 6, max = 20)
     private String password;
 
-//    @Column(nullable = false)
-//    private String nickname;
-
+    @NotNull
+    @NotEmpty
+    @Size(min = 4, max = 20)
+    private String nickname;
 
     public User() {
     }
 
-    public User(String name, String surname, String password) {
+    public User(String name, String surname, String nickname, String password) {
         this.name = name;
         this.surname = surname;
+        this.nickname = nickname;
         this.password = password;
     }
 
@@ -54,14 +66,14 @@ public class User {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-//
-//    public String getNickname() {
-//        return nickname;
-//    }
-//
-//    public void setNickname(String nickname) {
-//        this.nickname = nickname;
-//    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
     public String getPassword() {
         return password;
@@ -77,6 +89,8 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
                 '}';
     }
 }

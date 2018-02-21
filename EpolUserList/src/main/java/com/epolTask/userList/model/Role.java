@@ -1,15 +1,28 @@
 package com.epolTask.userList.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "roles")
 public class Role {
+    @NotNull
+    @NotEmpty
+    @Id
     private Long id;
+
+    @NotNull
+    @NotEmpty
     private String privilege;
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", privilege='" + privilege + '\'' +
-                '}';
+    public Role() {
+    }
+
+    public Role(Long id, String privilege) {
+        this.id = id;
+        this.privilege = privilege;
     }
 
     public Long getId() {
@@ -28,9 +41,11 @@ public class Role {
         this.privilege = privilege;
     }
 
-    public Role(Long id, String privilege) {
-
-        this.id = id;
-        this.privilege = privilege;
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", privilege='" + privilege + '\'' +
+                '}';
     }
 }
