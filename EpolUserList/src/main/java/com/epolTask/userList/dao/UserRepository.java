@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserDao extends JpaRepository<User, Long>{
-//    void deleteUserById(Long id);
-//    List<User> getAllUsers();
-//    User findUserByName(String name);
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
 }

@@ -4,7 +4,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -14,38 +16,39 @@ public class User {
     private Long id;
 
     @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Please enter name")
     @Size(min = 2, max = 20)
     private String name;
 
     @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Please enter surname")
     @Size(min = 2, max = 20)
     private String surname;
 
     @NotNull
-    @NotEmpty
-    @Size(min = 6, max = 20)
+    @NotEmpty(message = "Please enter password")
+    @Pattern(regexp = "(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", message = "Password must contain nums and 8-20")
     private String password;
 
     @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Please enter username")
     @Size(min = 4, max = 20)
-    private String nickname;
+    private String username;
+
+    @ManyToMany
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public User() {
     }
 
-    public User(String name, String surname, String nickname, String password) {
+    public User(String name, String surname, String username, String password) {
         this.name = name;
         this.surname = surname;
-        this.nickname = nickname;
+        this.username = username;
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -53,6 +56,10 @@ public class User {
 
     public String getSurname() {
         return surname;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
@@ -67,12 +74,12 @@ public class User {
         this.surname = surname;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -83,6 +90,14 @@ public class User {
         this.password = password;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -90,7 +105,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", password='" + password + '\'' +
-                ", nickname='" + nickname + '\'' +
+                ", username='" + username + '\'' +
                 '}';
     }
 }

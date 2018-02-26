@@ -7,6 +7,6 @@ insert into users values
     (5, 'kirill', 'kuchma', '122345', 'kurKuch'),
     (6, 'david', 'beckham', '122345', 'DBeckham'),
     (7, 'samir', 'letun', '122345', 'samLetun'),
-    (8, 'dmitry', 'volkov', '122345', 'DVolkD'),
+    (8, 'dmitry', 'volkov', '1  22345', 'DVolkD'),
     (9, 'sandra', 'petrova', '122345', 'kesandra'),
     (10, 'bob', 'marlin', '122345', 'marlinB');

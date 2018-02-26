@@ -7,15 +7,15 @@
         <h1>Welcome!</h1>
 
 
-        <form th:action="@{/register}" th:object="${user}" method="POST">
+        <form th:action="@{/reg}"  th:object="${user}" method="POST">
             <table>
-                <tr>
-                    <td>id</td>
-                    <td><input type="text" th:field="*{id}" /> </td>
-                    <td>
-                        <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">..</span>
-                    </td>
-                </tr>
+                <!--<tr>-->
+                    <!--<td>id</td>-->
+                    <!--<td><input type="text" th:field="*{id}" /> </td>-->
+                    <!--<td>-->
+                        <!--<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">..</span>-->
+                    <!--</td>-->
+                <!--</tr>-->
                 <tr>
                     <td>First Name</td>
                     <td><input type="text" th:field="*{name}" /> </td>
@@ -31,10 +31,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Nickname</td>
-                    <td><input type="text" th:field="*{nickname}" /> </td>
+                    <td>Username</td>
+                    <td><input type="text" th:field="*{username}" /> </td>
                     <td>
-                        <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">..</span>
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">..</span>
                     </td>
                 </tr>
                 <tr>

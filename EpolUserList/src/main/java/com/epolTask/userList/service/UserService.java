@@ -8,6 +8,6 @@ import java.util.List;
 public interface UserService {
     public List<User> getAllUsers();
     public void deleteUserById(Long id);
-    public void createUser(User user);
-//    void findUserByName(String name);
+    public void saveUser(User user);
+    User findByUsername(String username);
 }
