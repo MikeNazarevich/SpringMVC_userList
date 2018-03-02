@@ -6,6 +6,7 @@
     </head>
     <body>
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <h2></h2>
         <table>
             <thead>
             <td>id</td>
@@ -20,6 +21,7 @@
                 <td th:text="*{getSurname()}"></td>
                 <td th:text="*{getPassword()}"></td>
                 <td><a th:href="@{/{id}/delete(id=*{getId()})}">delete</a> </td>
+                <td th:text="*{getRoles()}"></td>
             </tr>
         </table>
         <form th:action="@{/logout}" method="post">

@@ -1,6 +1,6 @@
 package com.epolTask.userList.service;
 
-import com.epolTask.userList.dao.UserRepository;
+import com.epolTask.userList.repository.UserRepository;
 import com.epolTask.userList.model.Role;
 import com.epolTask.userList.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
