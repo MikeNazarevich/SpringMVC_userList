@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <h1>Choose your car</h1>
+    <table>
+        <thead>
+            <td>id</td>
+            <td>name</td>
+            <td>photo</td>
+            <td></td>
+        </thead>
+        <tr th:object="${c}"  th:each="c : ${cars}">
+
+            <td th:text="*{getId()}"></td>
+            <td th:text="*{getName()}"></td>
+            <td th:text="*{getPhoto()}"></td>
+            <td><input type="checkbox" th:checked="${true}" /></td>
+        </tr>
+    </table>
+    <input th:type="submit" value="submit"/>
+    <a th:href="@{/}">Cancel</a>
+</body>
+</html>

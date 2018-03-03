@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
@@ -24,24 +24,21 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private SecurityService securityService;
+//    @Autowired
+//    private SecurityService securityService;
 
     @Override
-    @Transactional
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    @Transactional
     public void deleteUserById(Long id) {
         userRepository.delete(id);
     }
 
     @Override
-    @Transactional
-    public void saveUser(User user) {
+    public void addUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         HashSet<Role> roles = new HashSet<>();

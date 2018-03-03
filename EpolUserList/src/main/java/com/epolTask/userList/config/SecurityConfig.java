@@ -1,8 +1,6 @@
 package com.epolTask.userList.config;
 
 
-import com.epolTask.userList.service.SecurityService;
-import com.epolTask.userList.service.SecurityServiceImpl;
 import com.epolTask.userList.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -62,9 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         return new UserDetailsServiceImpl();
     }
-
-    @Bean
-    public SecurityService securityService() {
-        return new SecurityServiceImpl();
-    }
+//
+//    @Bean
+//    public SecurityService securityService() {
+//        return new SecurityServiceImpl();
+//    }
 }

@@ -1,6 +1,7 @@
 package com.epolTask.userList.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -39,6 +40,14 @@ public class Car {
         this.name = name;
     }
 
+    public Set<User> getOwners() {
+        return owners;
+    }
+
+    public void setOwners(Set<User> owners) {
+        this.owners = owners;
+    }
+
     public String getPhoto() {
         return photo;
     }
@@ -47,10 +56,35 @@ public class Car {
         this.photo = photo;
     }
 
-    public Car(String name, String photo) {
-        this.name = name;
-        this.photo = photo;
-    }
+    //    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Car car = (Car) o;
+//        return Objects.equals(id, car.id) &&
+//                Objects.equals(name, car.name) &&
+//                Objects.equals(owners, car.owners) &&
+//                Objects.equals(photo, car.photo);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//
+//        return Objects.hash(id, name, owners, photo);
+//    }
+//
+//    public String getPhoto() {
+//        return photo;
+//    }
+//
+//    public void setPhoto(String photo) {
+//        this.photo = photo;
+//    }
+//
+//    public Car(String name, String photo) {
+//        this.name = name;
+//        this.photo = photo;
+//    }
 
     @Override
     public String toString() {
