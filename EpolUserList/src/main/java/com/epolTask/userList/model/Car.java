@@ -9,20 +9,28 @@ import java.util.Set;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "user_car",
-                joinColumns = @JoinColumn(name = "car_id"),
-                inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    private String[] multiCheckbox;
+
+    @ManyToMany(mappedBy = "cars")
+//    @JoinTable(name = "user_car",
+//                joinColumns = @JoinColumn(name = "car_id"),
+//                inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> owners;
 
     @Column(name = "photo")
     private String photo;
+
+    public Car() {}
+
+    public Car(String name, String photo) {
+        this.name = name;
+        this.photo = photo;
+    }
 
     public Long getId() {
         return id;
@@ -56,40 +64,11 @@ public class Car {
         this.photo = photo;
     }
 
-    //    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Car car = (Car) o;
-//        return Objects.equals(id, car.id) &&
-//                Objects.equals(name, car.name) &&
-//                Objects.equals(owners, car.owners) &&
-//                Objects.equals(photo, car.photo);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//
-//        return Objects.hash(id, name, owners, photo);
-//    }
-//
-//    public String getPhoto() {
-//        return photo;
-//    }
-//
-//    public void setPhoto(String photo) {
-//        this.photo = photo;
-//    }
-//
-//    public Car(String name, String photo) {
-//        this.name = name;
-//        this.photo = photo;
-//    }
-
     @Override
     public String toString() {
         return "Car{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", photo='" + photo + '\'' +
                 '}';
     }

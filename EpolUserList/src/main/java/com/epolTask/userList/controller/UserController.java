@@ -1,11 +1,14 @@
 package com.epolTask.userList.controller;
 
 
+import com.epolTask.userList.model.Role;
 import com.epolTask.userList.model.User;
+import com.epolTask.userList.service.CarService;
 import com.epolTask.userList.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +22,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CarService carService;
+
 
 //    @Autowired
 //    private SecurityService securityService;
@@ -56,13 +63,24 @@ public class UserController {
 
     @PostMapping(value = "/reg")
     public String registration(@Valid User user, BindingResult bindingResult) {
-
+        Model model;
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        userService.addUser(user);
-        return "redirect:/login";
+
+        System.out.println(userService.findByUsername(user.getUsername()));
+        if (userService.findByUsername(user.getUsername()) != null)
+            return "redirect:/reg";
+
+//            Assert.hasText(user.getUsername(), "Please choose another name");
+        else {
+            userService.addUser(user);
+            return "redirect:/login";
+        }
     }
+
+
+
 
 
 }

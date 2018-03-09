@@ -1,4 +1,4 @@
-package com.epolTask.userList.service.api;
+package com.epolTask.userList.service;
 
 import com.epolTask.userList.model.Car;
 
@@ -10,5 +10,5 @@ public interface CarService {
 
     void deleteCarById(Long id);
 
-
+    Car addCar(Long id);
 }

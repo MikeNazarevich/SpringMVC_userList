@@ -2,7 +2,7 @@ package com.epolTask.userList.service;
 
 import com.epolTask.userList.model.Car;
 import com.epolTask.userList.repository.CarRepository;
-import com.epolTask.userList.service.api.CarService;
+import com.epolTask.userList.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,4 +25,12 @@ public class CarServiceImpl implements CarService {
     public void deleteCarById(Long id) {
         carRepository.delete(id);
     }
+
+    @Override
+    public Car addCar(Long id) {
+         Car car = carRepository.findCarById(id);
+         return car;
+    }
+
+
 }

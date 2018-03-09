@@ -31,17 +31,21 @@ public class User {
     @Pattern(regexp = "(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", message = "Password must contain nums and 8-20")
     private String password;
 
-    @NotNull
+//    @NotNull
     @NotEmpty(message = "Please enter username")
     @Size(min = 4, max = 20)
     private String username;
 
     @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @ManyToMany(mappedBy = "owners")
+    @ManyToMany
+    @JoinTable(name = "user_car",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "car_id"))
     private Set<Car> cars;
 
     public User() {
@@ -103,25 +107,36 @@ public class User {
         this.roles = roles;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(surname, user.surname) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(roles, user.roles) &&
-                Objects.equals(cars, user.cars);
+    public Set<Car> getCars() {
+        return cars;
     }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, name, surname, password, username, roles, cars);
+    public void setCars(Set<Car> cars) {
+        this.cars = cars;
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        User user = (User) o;
+//        return Objects.equals(id, user.id) &&
+//                Objects.equals(name, user.name) &&
+//                Objects.equals(surname, user.surname) &&
+//                Objects.equals(password, user.password) &&
+//                Objects.equals(username, user.username) &&
+//                Objects.equals(roles, user.roles) &&
+//                Objects.equals(cars, user.cars);
+//    }
+
+
+
+
+//    @Override
+//    public int hashCode() {
+//
+//        return Objects.hash(id, name, surname, password, username, roles, cars);
+//    }
 
     @Override
     public String toString() {
@@ -131,6 +146,7 @@ public class User {
                 ", surname='" + surname + '\'' +
                 ", password='" + password + '\'' +
                 ", username='" + username + '\'' +
+                ", car='" + cars + '\'' +
                 '}';
     }
 }

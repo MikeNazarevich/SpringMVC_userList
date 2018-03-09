@@ -10,4 +10,6 @@ public interface UserService {
     void deleteUserById(Long id);
     void addUser(User user);
     User findByUsername(String username);
+    void addCar(Long id);
+    //    int isAdmin(User user);
 }

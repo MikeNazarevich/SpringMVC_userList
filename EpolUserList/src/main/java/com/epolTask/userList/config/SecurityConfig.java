@@ -1,6 +1,8 @@
 package com.epolTask.userList.config;
 
 
+import com.epolTask.userList.service.SecurityService;
+import com.epolTask.userList.service.SecurityServiceImpl;
 import com.epolTask.userList.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -59,9 +61,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         return new UserDetailsServiceImpl();
     }
-//
-//    @Bean
-//    public SecurityService securityService() {
-//        return new SecurityServiceImpl();
-//    }
+
+    @Bean
+    public SecurityService securityService() {
+        return new SecurityServiceImpl();
+    }
 }
