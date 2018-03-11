@@ -26,16 +26,14 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private CarRepository carRepository;
 
     @Autowired
-    private CarService carService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private SecurityService securityService;
 
-    @Autowired
-    private CarRepository carRepository;
 
     public User getLoggedInUser() throws DataAccessException {
         return findByUsername(securityService.findLoggedInUsername());
@@ -63,7 +61,8 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    public void addCar(Long id) {
+    @Override
+    public void addCarToUser(Long id) {
         User user = getLoggedInUser();
         System.out.println(user);
         HashSet<Car> cars = new HashSet<>();
@@ -75,10 +74,10 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    public boolean isAdmin(User user) {
-        Role role = roleRepository.findRoleByPrivilege("ADMIN");
-        return user.getRoles().contains(role);
-    }
+//    public boolean isAdmin(User user) {
+//        Role role = roleRepository.findRoleByPrivilege("ADMIN");
+//        return user.getRoles().contains(role);
+//    }
 
     @Override
     public User findByUsername(String username) {

@@ -20,7 +20,12 @@
                 <td th:text="*{getId()}"></td>
                 <td th:text="*{getName()}"></td>
                 <td><img  th:src="*{getPhoto()}" style="width: 100px"/> </td>
-                <td><a th:href="@{/{id}/add(id=*{getId()})}">add</a> </td>
+                <td>
+                    <a th:href="@{/{id}/add(id=*{getId()})}">add</a>
+                </td>
+                <td>
+                    <a th:href="@{/{id}/car/delete(id=*{getId()})}">delete</a>
+                </td>
                 <!--<td><input type="checkbox" th:checked="${true}" /></td>-->
             </tr>
         </table>

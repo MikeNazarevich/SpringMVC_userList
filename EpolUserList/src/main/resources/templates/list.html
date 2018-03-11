@@ -10,18 +10,18 @@
         <table>
             <thead>
                 <td>id</td>
-                <td>name</td>
-                <td>surname</td>
+                <td>username</td>
                 <td></td>
             </thead>
 
-            <tr th:object="${u}"  th:each="u : ${users}">
+            <tr th:object="${u}" th:each="u : ${users}" >
                 <td th:text="*{getId()}"></td>
-                <td th:text="*{getName()}"></td>
-                <td th:text="*{getSurname()}"></td>
-                <td th:text="*{getCars()}"></td>
-                <td><a th:href="@{/{id}/delete(id=*{getId()})}">delete</a> </td>
-                <td th:text="*{roles}"></td>
+
+                <td>
+                    <a th:href="@{/{username}/user/detail_info(username=*{getUsername()})}" th:text="*{getUsername()}"></a>
+                </td>
+
+                <td><a th:href="@{/{id}/user/delete(id=*{getId()})}">delete</a> </td>
             </tr>
         </table>
         <a th:href="@{/cars}">choose car</a>

@@ -14,12 +14,7 @@ public class Car {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-//    private String[] multiCheckbox;
-
     @ManyToMany(mappedBy = "cars")
-//    @JoinTable(name = "user_car",
-//                joinColumns = @JoinColumn(name = "car_id"),
-//                inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> owners;
 
     @Column(name = "photo")

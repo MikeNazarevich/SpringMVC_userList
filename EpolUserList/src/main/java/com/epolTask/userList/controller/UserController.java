@@ -1,11 +1,14 @@
 package com.epolTask.userList.controller;
 
 
+import com.epolTask.userList.dto.UserDetailInfo;
 import com.epolTask.userList.model.Role;
 import com.epolTask.userList.model.User;
 import com.epolTask.userList.service.CarService;
+import com.epolTask.userList.service.SecurityService;
 import com.epolTask.userList.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -16,25 +19,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/users")
 public class UserController {
 
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private CarService carService;
-
-
-//    @Autowired
-//    private SecurityService securityService;
-
-    @GetMapping(value = "/kek")
-    public @ResponseBody
-    List<User> getAllUsers() {
-        return userService.getAllUsers();
-    }
 
     @GetMapping(value = "/")
     public String hello(Model model) {
@@ -42,7 +32,7 @@ public class UserController {
         return "list";
     }
 
-    @GetMapping(value="/{id}/delete")
+    @GetMapping(value="/{id}/user/delete")
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
         return "redirect:/";
@@ -50,7 +40,6 @@ public class UserController {
 
     @GetMapping(value = "/login")
     public String login() {
-
         return "login";
     }
 
@@ -63,20 +52,24 @@ public class UserController {
 
     @PostMapping(value = "/reg")
     public String registration(@Valid User user, BindingResult bindingResult) {
-        Model model;
-        if (bindingResult.hasErrors()) {
+            if (bindingResult.hasErrors()) {
             return "registration";
         }
 
         System.out.println(userService.findByUsername(user.getUsername()));
         if (userService.findByUsername(user.getUsername()) != null)
             return "redirect:/reg";
-
 //            Assert.hasText(user.getUsername(), "Please choose another name");
         else {
             userService.addUser(user);
             return "redirect:/login";
         }
+    }
+
+    @GetMapping(value = "/{username}/user/detail_info")
+    public String detailInfo(Model model, @PathVariable("username") String username) {
+        model.addAttribute("user", new UserDetailInfo(userService.findByUsername(username)));
+        return "UserInfo";
     }
 
 

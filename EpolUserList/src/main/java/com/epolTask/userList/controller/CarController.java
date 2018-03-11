@@ -27,7 +27,13 @@ public class CarController {
 
     @GetMapping(value = "/{id}/add")
     public String getCars(@PathVariable("id") Long id) {
-        userService.addCar(id);
+        userService.addCarToUser(id);
         return "redirect:/";
+    }
+
+    @GetMapping(value = "{id}/car/delete")
+    public String delete(@PathVariable("id") Long id) {
+        carService.deleteCarById(id);
+        return "redirect:/cars";
     }
 }
