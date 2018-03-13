@@ -35,9 +35,6 @@ public class UserServiceImpl implements UserService {
     private SecurityService securityService;
 
 
-    public User getLoggedInUser() throws DataAccessException {
-        return findByUsername(securityService.findLoggedInUsername());
-    }
 
     @Override
     public List<User> getAllUsers() {
@@ -82,5 +79,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public User getLoggedInUser() throws DataAccessException {
+        return findByUsername(securityService.findLoggedInUsername());
     }
 }

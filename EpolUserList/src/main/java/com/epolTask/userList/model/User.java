@@ -1,5 +1,6 @@
 package com.epolTask.userList.model;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -16,24 +17,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @NotEmpty(message = "Please enter name")
+    @NotBlank(message = "Please enter name")
     @Size(min = 2, max = 20)
     private String name;
 
-    @NotNull
-    @NotEmpty(message = "Please enter surname")
+    @NotBlank(message = "Please enter surname")
     @Size(min = 2, max = 20)
     private String surname;
 
-    @NotNull
-    @NotEmpty(message = "Please enter password")
-    @Pattern(regexp = "(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", message = "Password must contain nums and 8-20")
+    @NotBlank(message = "Please enter password")
+    @Pattern(regexp = "(?=^.{6,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", message = "Password must contain nums and 8-20")
     private String password;
 
 //    @NotNull
-    @NotEmpty(message = "Please enter username")
+//    @UniqueUsername
+    @NotBlank(message = "Please enter username")
     @Size(min = 4, max = 20)
+//    @Column(unique = true)
     private String username;
 
     @ManyToMany

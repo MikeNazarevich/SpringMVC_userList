@@ -10,9 +10,12 @@
         <p th:text="*{getUsername()}"></p>
         <p th:text="*{getName()}"></p>
         <p th:text="*{getSurname()}"></p>
-        <p th:text="*{getCars()}"></p>
+        <div>
+            <div th:if="*{getCars().get(0).getName()}">
+                <img th:src="@{/{link}(link=*{getCars().get(0).getPhoto()})}" style="width: 100px"/>
+            </div>
+        </div>
     </div>
     <a th:href="@{/}">Cancel</a>
-    <!--<a th:if="${user.getUsername()} == "-->
 </body>
 </html>

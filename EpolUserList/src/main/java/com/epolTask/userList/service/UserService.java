@@ -15,4 +15,6 @@ public interface UserService {
     User findByUsername(String username);
 
     void addCarToUser(Long id);
+
+    User getLoggedInUser();
 }

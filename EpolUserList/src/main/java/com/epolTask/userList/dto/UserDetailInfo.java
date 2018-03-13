@@ -19,6 +19,8 @@ public class UserDetailInfo {
 
     private List<Car> cars = new ArrayList<>();
 
+    private List<Role> roles = new ArrayList<>();
+
     private Boolean isAdmin;
 
     public UserDetailInfo(User user) {
@@ -31,7 +33,7 @@ public class UserDetailInfo {
             cars.add(car);
 
         for (Role role : user.getRoles()) {
-            if (role.getPrivilege() == "ADMIN")
+            if (role.getPrivilege().compareTo("ADMIN") == 0)
                 isAdmin = true;
         }
     }
@@ -74,6 +76,14 @@ public class UserDetailInfo {
 
     public void setCars(List<Car> cars) {
         this.cars = cars;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public Boolean getAdmin() {

@@ -21,13 +21,12 @@ import java.util.List;
 @Controller
 public class UserController {
 
-
     @Autowired
     private UserService userService;
 
-
     @GetMapping(value = "/")
     public String hello(Model model) {
+        model.addAttribute("user", new UserDetailInfo(userService.getLoggedInUser()));
         model.addAttribute("users", userService.getAllUsers());
         return "list";
     }
@@ -59,7 +58,7 @@ public class UserController {
         System.out.println(userService.findByUsername(user.getUsername()));
         if (userService.findByUsername(user.getUsername()) != null)
             return "redirect:/reg";
-//            Assert.hasText(user.getUsername(), "Please choose another name");
+
         else {
             userService.addUser(user);
             return "redirect:/login";

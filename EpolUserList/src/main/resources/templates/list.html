@@ -6,24 +6,27 @@
     </head>
     <body>
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-        <h2></h2>
-        <table>
-            <thead>
-                <td>id</td>
-                <td>username</td>
-                <td></td>
-            </thead>
 
-            <tr th:object="${u}" th:each="u : ${users}" >
-                <td th:text="*{getId()}"></td>
+        <div th:object="${user}">
+            <table>
+                <thead>
+                    <td>id</td>
+                    <td>username</td>
+                    <td></td>
+                </thead>
 
-                <td>
-                    <a th:href="@{/{username}/user/detail_info(username=*{getUsername()})}" th:text="*{getUsername()}"></a>
-                </td>
+                <tr th:object="${u}" th:each="u : ${users}" >
+                    <td th:text="*{getId()}"></td>
 
-                <td><a th:href="@{/{id}/user/delete(id=*{getId()})}">delete</a> </td>
-            </tr>
-        </table>
+                    <td>
+                        <a th:href="@{/{username}/user/detail_info(username=*{getUsername()})}" th:text="*{getUsername()}"></a>
+                    </td>
+
+                    <td th:if="${user.getAdmin()}"><a th:href="@{/{id}/user/delete(id=*{getId()})}">delete</a> </td>
+                    <td th:text="*{getRoles()}"></td>
+                </tr>
+            </table>
+        </div>
         <a th:href="@{/cars}">choose car</a>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
