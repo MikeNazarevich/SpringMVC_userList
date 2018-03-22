@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Hello World!</title>
+    </head>
+    <body>
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+        <div th:object="${user}">
+            <table>
+                <thead>
+                    <td>id</td>
+                    <td>username</td>
+                    <td></td>
+                </thead>
+
+                <tr th:object="${u}" th:each="u : ${users}" >
+                    <td th:text="*{getId()}"></td>
+
+                    <td>
+                        <a th:href="@{/{username}/user/detail_info(username=*{getUsername()})}" th:text="*{getUsername()}"></a>
+                    </td>
+
+                    <td th:if="${user.getAdmin()}"><a th:href="@{/{id}/user/delete(id=*{getId()})}">delete</a> </td>
+                    <td th:text="*{getRoles()}"></td>
+                </tr>
+            </table>
+        </div>
+        <a th:href="@{/cars}">choose car</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </body>
+</html>

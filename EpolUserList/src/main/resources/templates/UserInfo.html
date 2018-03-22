@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    <div th:object="${user}">
+        <p th:text="*{getUsername()}"></p>
+        <p th:text="*{getName()}"></p>
+        <p th:text="*{getSurname()}"></p>
+        <div>
+            <div th:if="*{getCars().get(0).getName()}">
+                <img th:src="@{/{link}(link=*{getCars().get(0).getPhoto()})}" style="width: 100px"/>
+            </div>
+        </div>
+    </div>
+    <a th:href="@{/}">Cancel</a>
+</body>
+</html>
