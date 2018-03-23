@@ -1,6 +1,8 @@
 package com.epolTask.userList.service;
 
 
+import com.epolTask.userList.dto.UserBaseInfo;
+import com.epolTask.userList.dto.UserRegInfo;
 import com.epolTask.userList.model.User;
 
 import java.util.List;
@@ -10,7 +12,7 @@ public interface UserService {
 
     void deleteUserById(Long id);
 
-    void addUser(User user);
+    User addUser(UserRegInfo user);
 
     User findByUsername(String username);
 

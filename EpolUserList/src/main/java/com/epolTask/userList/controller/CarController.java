@@ -1,16 +1,22 @@
 package com.epolTask.userList.controller;
 
+import com.epolTask.userList.dto.CarBaseInfo;
+import com.epolTask.userList.model.Car;
 import com.epolTask.userList.model.User;
 import com.epolTask.userList.service.UserService;
 import com.epolTask.userList.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-@Controller
+@RestController
+@CrossOrigin
 public class CarController {
 
    @Autowired
@@ -20,20 +26,27 @@ public class CarController {
     private UserService userService;
 
     @GetMapping(value = "/cars")
-    public String carList(Model model) {
-        model.addAttribute("cars", carService.getAllCars());
-        return "cars";
+    @ResponseBody
+    public List<CarBaseInfo> carList() {
+        List<Car> cars = carService.getAllCars();
+        List<CarBaseInfo> carBaseInfos = new ArrayList<>();
+
+        for (Car car : cars)
+            carBaseInfos.add(new CarBaseInfo(car));
+
+       return carBaseInfos;
     }
 
-    @GetMapping(value = "/{id}/add")
+    @PostMapping(value = "/{id}/add")
     public String getCars(@PathVariable("id") Long id) {
         userService.addCarToUser(id);
         return "redirect:/";
     }
 
-    @GetMapping(value = "{id}/car/delete")
-    public String delete(@PathVariable("id") Long id) {
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping(value = "{id}/car/delete")
+    public void delete(@PathVariable("id") Long id) {
+
         carService.deleteCarById(id);
-        return "redirect:/cars";
     }
 }

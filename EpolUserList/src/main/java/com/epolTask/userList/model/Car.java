@@ -1,6 +1,7 @@
 package com.epolTask.userList.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,8 +15,12 @@ public class Car {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "cars")
-    private Set<User> owners;
+    @ManyToMany
+    @JoinTable(name = "user_car",
+            joinColumns = @JoinColumn(name = "car_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> owners;
 
     @Column(name = "photo")
     private String photo;
@@ -43,11 +48,11 @@ public class Car {
         this.name = name;
     }
 
-    public Set<User> getOwners() {
+    public List<User> getOwners() {
         return owners;
     }
 
-    public void setOwners(Set<User> owners) {
+    public void setOwners(List<User> owners) {
         this.owners = owners;
     }
 

@@ -1,5 +1,7 @@
 package com.epolTask.userList.service;
 
+import com.epolTask.userList.dto.UserBaseInfo;
+import com.epolTask.userList.dto.UserRegInfo;
 import com.epolTask.userList.model.Car;
 import com.epolTask.userList.repository.CarRepository;
 import com.epolTask.userList.repository.RoleRepository;
@@ -47,15 +49,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
+    public User addUser(UserRegInfo userRegInfo) {
+        User user = new User(userRegInfo);
+
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         HashSet<Role> roles = new HashSet<>();
         Role userRole = roleRepository.findRoleByPrivilege("USER");
-        System.out.println(userRole);
         roles.add(userRole);
         user.setRoles(roles);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -70,11 +73,6 @@ public class UserServiceImpl implements UserService {
         System.out.println(user);
         userRepository.save(user);
     }
-
-//    public boolean isAdmin(User user) {
-//        Role role = roleRepository.findRoleByPrivilege("ADMIN");
-//        return user.getRoles().contains(role);
-//    }
 
     @Override
     public User findByUsername(String username) {

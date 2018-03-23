@@ -1,5 +1,6 @@
 package com.epolTask.userList.model;
 
+import com.epolTask.userList.dto.UserRegInfo;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -39,16 +40,24 @@ public class User {
     @ManyToMany
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Set<Role> roles;
 
-    @ManyToMany
-    @JoinTable(name = "user_car",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "car_id"))
+    @ManyToMany(mappedBy = "owners")
+//    @JoinTable(name = "user_car",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "car_id"))
     private Set<Car> cars;
 
     public User() {
+    }
+
+    public User(UserRegInfo userRegInfo) {
+        name = userRegInfo.getName();
+        surname = userRegInfo.getSurname();
+        username = userRegInfo.getUsername();
+        password = userRegInfo.getPassword();
     }
 
     public User(String name, String surname, String username, String password) {

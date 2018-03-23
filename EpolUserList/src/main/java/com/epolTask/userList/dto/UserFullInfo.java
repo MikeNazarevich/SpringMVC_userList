@@ -7,7 +7,9 @@ import com.epolTask.userList.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDetailInfo {
+public class UserFullInfo {
+
+    private Long userId;
 
     private String name;
 
@@ -15,21 +17,36 @@ public class UserDetailInfo {
 
     private String username;
 
-    private List<CarMinInfo> cars = new ArrayList<>();
+    private List<Car> cars = new ArrayList<>();
 
-    private List<RoleInfo> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>();
 
-    public UserDetailInfo(User user) {
+    private Boolean isAdmin;
+
+    public UserFullInfo() {
+    }
+
+    public UserFullInfo(User user) {
+        userId = user.getId();
         name = user.getName();
         surname = user.getSurname();
         username = user.getUsername();
 
         for (Car car : user.getCars())
-            cars.add(new CarMinInfo(car));
+            cars.add(car);
 
-        for (Role role : user.getRoles())
-            roles.add(new RoleInfo(role));
+        for (Role role : user.getRoles()) {
+            if (role.getPrivilege().compareTo("ADMIN") == 0)
+                isAdmin = true;
+        }
+    }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -56,19 +73,27 @@ public class UserDetailInfo {
         this.username = username;
     }
 
-    public List<CarMinInfo> getCars() {
+    public List<Car> getCars() {
         return cars;
     }
 
-    public void setCars(List<CarMinInfo> cars) {
+    public void setCars(List<Car> cars) {
         this.cars = cars;
     }
 
-    public List<RoleInfo> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleInfo> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 }
