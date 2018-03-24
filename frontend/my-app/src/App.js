@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Property from './Property';
+import UsersList from './components/UsersList/UsersList';
+import CarList from './components/CarsList/CarsList';
+import Details from './components/UsersList/Details';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isLoaded: false
-    }
-  }
+ 
+  // componentDidMount() {
+  //   fetch('http://localhost:8050/qwerty/user/detail_info')
+    
+  //     .then((data) => data.json())
+  //     .then((data) => {
+  //       this.setState({
+  //         data: data,
+  //         isLoaded: true
+  //       })
+  //     })
+  // }
 
-  componentDidMount() {
-    fetch('http://localhost:8050/')
-      .then((data) => data.json())
-      .then((data) => {
-        this.setState({
-          data: data,
-          isLoaded: true
-        })
-      })
-  }
+
   
   render() {
-    if (this.state.isLoaded === false)
-      return null;
-
-    const data = this.state.data;
     return (
       <div className="App">
         <header className="App-header">
@@ -36,7 +31,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-          <Property property={data.username} />
+        <UsersList />
+        <CarList />
+        <Details />
       </div>
     );
   }
