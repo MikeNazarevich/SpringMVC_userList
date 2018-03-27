@@ -1,0 +1,8 @@
+ul li {
+    list-style-type: none;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+}
