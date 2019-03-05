@@ -29,7 +29,7 @@ public class UserController {
     public List<UserBaseInfo> list() {
 
         List<User> users = userService.getAllUsers();
-        List<UserBaseInfo> userBaseInfo = new ArrayList<>();
+        ArrayList<UserBaseInfo> userBaseInfo = new ArrayList<>();
 
         for (User user : users)
             userBaseInfo.add(new UserBaseInfo(user));
